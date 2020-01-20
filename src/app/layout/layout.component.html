@@ -1,27 +1,51 @@
 <nz-layout>
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-      <div class="logo"></div>
+    <nz-sider [(nzCollapsed)]="CollapsedNav" [nzTrigger]="null">
+      <div class="logo">
+        <img src="\assets\main-cart.png" >
+
+      </div>
+      
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
         
-        <li nz-menu-item *ngFor= "let cat of categories" >
-
-
-          <i nz-icon nzType="file"></i>
-          <span>{{cat.name}}</span>
+        <li 
+        nz-popover
+        [nzPopoverContent]="cat.name"
+        nzPopoverPlacement="rightBottom"
+        nz-menu-item *ngFor= "let cat of categories"  (click)="addCategoryToUrl(cat.name)">
+         <img [src]="cat.icon" >
+          
         </li>
       </ul>
     </nz-sider>
     <nz-layout>
-      <nz-header>
-        <i
-          class="trigger"
-          nz-icon
-          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          (click)="isCollapsed = !isCollapsed"
-        ></i>
-      </nz-header>
-      <nz-content>
+      <nz-header >
         
+      </nz-header>
+
+      
+
+      
+      <nz-content>
+        <nz-breadcrumb>
+            <nz-breadcrumb-item>User</nz-breadcrumb-item>
+            <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+          </nz-breadcrumb>
+          <nz-row style="float: right;">
+            <button nz-button nzType="primary" (click)="showModal()">
+              <span>Request for Products</span>
+            </button>
+            <nz-modal
+              [(nzVisible)]="isVisible"
+              nzTitle="Request for Products"
+              nzOkText="Submit"
+              [nzOkDisabled]="disableButton()"
+              (nzOnCancel)="handleCancel()"
+              (nzOnOk)="requestProduct()"
+              [nzOkLoading]="isOkLoading"
+            >
+            <input nz-input placeholder="Enter Products" name = "requestproductname" [(ngModel)] ="categoriesobj.requestproductname" />
+            </nz-modal>
+          </nz-row>
         <div class="inner-content">
             <div nz-col nzSpan="16">
             <app-product-listing> </app-product-listing>

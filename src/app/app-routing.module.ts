@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
-{path: '', component: LayoutComponent }
-
+{path: 'login', component: LoginComponent },  
+{path: '', component: LayoutComponent },
+{path:"categories/:category", component:LayoutComponent }
 ];
 
 @NgModule({
