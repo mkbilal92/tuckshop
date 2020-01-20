@@ -1,5 +1,98 @@
-<nz-card style="width: 100%;">
+<h3>Cart:<img src="\assets\cart.png"></h3>
+<hr />
+<div style="height: 400px; overflow-y: scroll;">
+<div>
+    <div *ngFor="let checkout of checkoutProductsArray">
+      <nz-card nzHoverable style="width:100%">
+        <div nz-row>
+          <div nz-col nzSpan="5">
+            <nz-avatar [nzShape]="'square'" [nzSize]="64" [nzSrc]="checkout.image" [nzIcon]="'user'"></nz-avatar>
+          </div>
+          <div nz-col nzSpan="4">
+            <h4 nz-title style="font-size: 15px;">{{checkout.productTitle}}</h4>
+          </div>
+          <div nz-col nzSpan="5">
+            <h4 nz-title>Qty&ensp;{{checkout.productQuantity}}
+              <br>
+              <div>
+                <nz-badge [nzCount]="count">
+                  <a class="head-example"></a>
+                </nz-badge>
+                <nz-button-group>
+                  <button nz-button (click)="plusProducts(checkout)"><i nz-icon nzType="plus"></i></button>
+                  <button nz-button (click)="minusProducts(checkout)"><i nz-icon nzType="minus"></i></button>
+                </nz-button-group>
+              </div>
+          
+              
+              <!-- <img src="\assets\icon-plus.png" (click)="plusProducts(checkout)">
+              <img src="\assets\icon-minus.png" (click)="minusProducts(checkout)"> -->
+            </h4>
+          </div>
+          <div nz-col nzSpan="5" nzOffset="1">
+            <h4 nz-title>Rs&ensp;{{checkout.productPrice}}</h4>
+          </div>
+
+          <div nz-col nzSpan="4">
+            <img src="\assets\del-icon.png" (click)="removeProductFromCheckout(checkout)">
+          </div>
+
+        </div>
+      </nz-card>
+    </div>
+  </div>
+</div>
+<hr />
+<div nz-row>
+
+  <div nz-col nzSpan="8">
+    <h3>Total:</h3>
+    <h3>{{total}}</h3>
+  </div>
+
+  <div nz-col nzSpan="8">
+    <button nz-button nzType="danger" nzBlock (click)="showModal()">Checkout</button>
+  </div>
+
+</div>
+
+<div>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Checkout" nzOkText="Print" nzCancelText="Continue" (nzOnOk)="handleOk()"
+    (nzOnCancel)="handleCancel()">
+    <h3>Thankyou for purchasing</h3>
+  </nz-modal>
+</div>
 
 
+<div id="print-section" [hidden]="true">
 
-</nz-card>
+  <div class="container">
+    <h2>Order Slip</h2>
+    <table class="table table-striped">
+      <thead>
+        <th *ngFor="let col of cols" style="text-align:center;">
+
+          {{col.header}}
+        </th>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let data of checkoutProductsArray" style="overflow:auto;">
+
+          <td>{{data.productTitle}}</td>
+          <td>{{data.productPrice}}</td>
+          <td>{{data.productQuantity}}</td>
+          <td>{{data.printProductPrice}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+    <div>
+      <hr style="border:1px sold black; width:100;" />
+
+      <span><b></b><span style="margin-left: 600px;">Total: {{total}}</span></span>
+      <hr style="border:1px sold black; width: 100px;" />
+    </div>
+  </div>
+</div>
