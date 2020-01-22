@@ -16,7 +16,7 @@ return this.http.get("http://localhost:3000/categories");
 }
 
 public requestProduct(obj:any):Observable<any>{
-  return this.http.post ("http://localhost:3000/requestproduct", obj);
+  return this.http.post ("http://localhost:8080/api/requestproduct/", obj);
   
   }
 

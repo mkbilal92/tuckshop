@@ -53,7 +53,7 @@ export class LayoutComponent implements OnInit {
           nzDuration: 3000
         });
 
-      this.categoriesobj.requestproductname = null;
+      this.categoriesobj.name = null;
 
 
     })
@@ -86,7 +86,7 @@ export class LayoutComponent implements OnInit {
 
   disableButton() {
 
-    if (this.categoriesobj.requestproductname) {
+    if (this.categoriesobj.name) {
       return false;
     }
     else {

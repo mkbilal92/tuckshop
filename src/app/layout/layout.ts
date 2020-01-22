@@ -1,5 +1,4 @@
 export class categories {
- 
-requestproductname: string; 
+ name: string; 
 
 }
